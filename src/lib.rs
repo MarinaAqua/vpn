@@ -23,8 +23,8 @@ async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
         .map(|x| Uuid::parse_str(&x.to_string()).unwrap_or_default())?;
     let host = req.url()?.host().map(|x| x.to_string()).unwrap_or_default();
     let main_page_url = env.var("MAIN_PAGE_URL").map(|x|x.to_string()).unwrap();
-    let sub_page_url = env.var("SUB_PAGE_URL").map(|x|x.to_string()).unwrap();
-    let link_page_url = env.var("LINK_PAGE_URL").map(|x|x.to_string()).unwrap();
+    let sublink_page_url = env.var("SUBLINK_PAGE_URL").map(|x|x.to_string()).unwrap();
+    let weblink_page_url = env.var("WEBLINK_PAGE_URL").map(|x|x.to_string()).unwrap();
     let vmess_page_url = env.var("VMESS_PAGE_URL").map(|x|x.to_string()).unwrap();
     let vless_page_url = env.var("VLESS_PAGE_URL").map(|x|x.to_string()).unwrap();
     let trojan_page_url = env.var("TROJAN_PAGE_URL").map(|x|x.to_string()).unwrap();
@@ -36,8 +36,8 @@ async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
         proxy_addr: host, 
         proxy_port: 443, 
         main_page_url, 
-        sub_page_url,
-        link_page_url,
+        sublink_page_url,
+        weblink_page_url,
         vmess_page_url,
         vless_page_url,
         trojan_page_url,
@@ -47,8 +47,8 @@ async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
 
     Router::with_data(config)
         .on_async("/", fe)
-        .on_async("/sub", sub)
-        .on_async("/link", link)
+        .on_async("/sublink", sublink)
+        .on_async("/weblink", weblink)
         .on_async("/vmess", vmess)
         .on_async("/vless", vless)
         .on_async("/trojan", trojan)
@@ -69,13 +69,13 @@ async fn fe(_: Request, cx: RouteContext<Config>) -> Result<Response> {
     get_response_from_url(cx.data.main_page_url).await
 }
 
-async fn sub(_: Request, cx: RouteContext<Config>) -> Result<Response> {
-    get_response_from_url(cx.data.sub_page_url).await
+async fn sublink(_: Request, cx: RouteContext<Config>) -> Result<Response> {
+    get_response_from_url(cx.data.sublink_page_url).await
 }
 
 // Changed to fetch from URL like fe and sub
-async fn link(_: Request, cx: RouteContext<Config>) -> Result<Response> {
-    get_response_from_url(cx.data.link_page_url).await
+async fn weblink(_: Request, cx: RouteContext<Config>) -> Result<Response> {
+    get_response_from_url(cx.data.weblink_page_url).await
 }
 
 async fn vmess(_: Request, cx: RouteContext<Config>) -> Result<Response> {
