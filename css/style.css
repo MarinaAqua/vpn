@@ -14,7 +14,7 @@
 }
 
 body {
-    background-image: url("/BG/bg.jpeg");
+    background-image: url("https://raw.githubusercontent.com/MarinaAqua/Portofolio2/main/BG/bg.jpeg");
     color: var(--light);
     line-height: 1.6;
 }
