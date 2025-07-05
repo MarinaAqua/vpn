@@ -25,10 +25,6 @@ async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
     let main_page_url = env.var("MAIN_PAGE_URL").map(|x|x.to_string()).unwrap();
     let sublink_page_url = env.var("SUBLINK_PAGE_URL").map(|x|x.to_string()).unwrap();
     let weblink_page_url = env.var("WEBLINK_PAGE_URL").map(|x|x.to_string()).unwrap();
-    let vmess_page_url = env.var("VMESS_PAGE_URL").map(|x|x.to_string()).unwrap();
-    let vless_page_url = env.var("VLESS_PAGE_URL").map(|x|x.to_string()).unwrap();
-    let trojan_page_url = env.var("TROJAN_PAGE_URL").map(|x|x.to_string()).unwrap();
-    let ss_page_url = env.var("SS_PAGE_URL").map(|x|x.to_string()).unwrap();
     let converter_page_url = env.var("CONVERTER_PAGE_URL").map(|x|x.to_string()).unwrap();
     let config = Config { 
         uuid, 
@@ -38,10 +34,6 @@ async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
         main_page_url, 
         sublink_page_url,
         weblink_page_url,
-        vmess_page_url,
-        vless_page_url,
-        trojan_page_url,
-        ss_page_url,
         converter_page_url
     };
 
@@ -49,11 +41,7 @@ async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
         .on_async("/", fe)
         .on_async("/sublink", sublink)
         .on_async("/weblink", weblink)
-        .on_async("/vmess", vmess)
-        .on_async("/vless", vless)
-        .on_async("/trojan", trojan)
-        .on_async("/converter", converter)
-        .on_async("/ss", ss)  // Changed to on_async
+        .on_async("/converter", converter)  // Changed to on_async
         .on_async("/Club-Gratis/:proxyip", tunnel)
         .run(req, env)
         .await
@@ -76,22 +64,6 @@ async fn sublink(_: Request, cx: RouteContext<Config>) -> Result<Response> {
 // Changed to fetch from URL like fe and sub
 async fn weblink(_: Request, cx: RouteContext<Config>) -> Result<Response> {
     get_response_from_url(cx.data.weblink_page_url).await
-}
-
-async fn vmess(_: Request, cx: RouteContext<Config>) -> Result<Response> {
-    get_response_from_url(cx.data.vmess_page_url).await
-}
-
-async fn vless(_: Request, cx: RouteContext<Config>) -> Result<Response> {
-    get_response_from_url(cx.data.vless_page_url).await
-}
-
-async fn trojan(_: Request, cx: RouteContext<Config>) -> Result<Response> {
-    get_response_from_url(cx.data.trojan_page_url).await
-}
-
-async fn ss(_: Request, cx: RouteContext<Config>) -> Result<Response> {
-    get_response_from_url(cx.data.ss_page_url).await
 }
 
 async fn converter(_: Request, cx: RouteContext<Config>) -> Result<Response> {
