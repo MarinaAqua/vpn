@@ -1,683 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio2 - Mr King's Official</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="https://raw.githubusercontent.com/MarinaAqua/MarinaAqua/main/my-profil.png"/>
-    <style>
-      * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-}
-
-:root {
-    --primary: #00ffff;
-    --dark: #0a192f;
-    --light: #ffffff;
-    --gray: #8892b0;
-    --glow-color: rgba(0, 255, 255, 0.6);
-}
-
-body {
-    background-image: url("background.jpeg");
-    color: var(--light);
-    line-height: 1.6;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Navigation */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-}
-
-.logo {
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
-    transition: text-shadow 0.3s ease;
-}
-
-.logo:hover {
-    text-shadow: 0 0 10px var(--glow-color);
-}
-
-.nav-links {
-    display: flex;
-    gap: 32px;
-}
-
-.nav-links a {
-    color: var(--light);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.nav-links a.active {
-    color: var(--primary);
-    text-shadow: 0 0 10px var(--glow-color);
-}
-
-.nav-links a:hover {
-    color: var(--primary);
-    text-shadow: 0 0 10px var(--glow-color);
-}
-
-.menu-btn {
-    display: none;
-    cursor: pointer;
-    font-size: 24px;
-}
-
-/* Hologram Effect */
-@keyframes hologramFlicker {
-    0% { opacity: 0.97; }
-    50% { opacity: 0.8; }
-    100% { opacity: 0.97; }
-}
-
-@keyframes hologramScan {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-}
-
-.hologram-container {
-    position: relative;
-    /* border: 2px dotted var(--primary); */
-    background: rgba(0, 255, 255, 0.05);
-    padding: 5%;
-    margin: 20px 0;
-    overflow: hidden;
-    animation: hologramFlicker 2s infinite;
-    display: flex !important;
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
-}
-
-.hologram-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        transparent,
-        rgba(0, 255, 255, 0.2),
-        transparent
-    );
-    animation: hologramScan 2s linear infinite;
-    pointer-events: none;
-}
-
-.hologram-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    pointer-events: none;
-}  
-
-/* Content Sections */
-.content-section {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.content-section.active {
-    display: block;
-    opacity: 1;
-}
-
-/* Hero Section */
-.hero-content {
-    flex: 1;
-}
-
-.hero-content h1 {
-    font-size: 48px;
-    margin-bottom: 16px;
-    transition: text-shadow 0.3s ease;
-}
-
-.hero-content h1:hover {
-    text-shadow: 0 0 15px var(--glow-color);
-}
-
-.hero-content h2 {
-    color: var(--primary);
-    font-size: 24px;
-    margin-bottom: 16px;
-    transition: text-shadow 0.3s ease;
-}
-
-.hero-content h2:hover {
-    text-shadow: 0 0 10px var(--glow-color);
-}
-
-.hero-content p {
-    color: var(--gray);
-    margin-bottom: 32px;
-    max-width: 500px;
-    transition: color 0.3s ease;
-}
-
-.hero-content p:hover {
-    color: var(--light);
-}
-
-.btn {
-    display: inline-block;
-    padding: 12px 32px;
-    background-color: var(--primary);
-    color: var(--dark);
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #00cccc;
-    box-shadow: 0 0 20px var(--glow-color);
-    transform: scale(1.05);
-}
-
-.social-links {
-    display: flex;
-    gap: 16px;
-    margin-top: 24px;
-}
-
-.social-links a {
-    color: var(--gray);
-    font-size: 24px;
-    transition: all 0.3s ease;
-}
-
-.social-links a:hover {
-    color: var(--primary);
-    text-shadow: 0 0 10px var(--glow-color);
-    transform: translateY(-2px);
-}
-
-.profile-image {
-    position: relative;
-    width: 320px;
-    height: 320px;
-    flex-shrink: 0;
-}
-
-.profile-circle {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: rgba(0, 255, 255, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-.profile-circle:hover {
-    box-shadow: 0 0 30px var(--glow-color);
-    transform: scale(1.05);
-}
-
-.profile-circle img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    transition: all 0.3s ease;
-}
-
-.profile-circle img:hover {
-    box-shadow: 0 0 20px var(--glow-color);
-}
-
-/* Project Cards */
-.projects-grid {
-    display: flex;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.project-card {
-    border: 1px solid var(--primary);
-    padding: 20px;
-    background: rgba(0, 255, 255, 0.05);
-    transition: all 0.3s ease;
-}
-
-.project-card:hover {
-    box-shadow: 0 0 20px var(--glow-color);
-    transform: translateY(-5px);
-}
-
-.project-card h3 {
-    color: var(--primary);
-    margin-bottom: 10px;
-    transition: text-shadow 0.3s ease;
-}
-
-.project-card h3:hover {
-    text-shadow: 0 0 10px var(--glow-color);
-}
-
-/* Skills Section */
-.skills-grid {
-    display: flex;  /* Ubah dari grid ke flex */
-    justify-content: space-between;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 100px; /* Memperbesar gap antara Frontend dan Backend */
-    padding: 40px; /* Menambah padding untuk space dari container */
-    max-width: 1000px; /* Membatasi lebar maksimal agar tidak terlalu lebar */
-    margin: 0 auto; /* Center skills grid */
-}
-.skill-category{
-    flex: 1;  /* Membuat setiap category mengambil ruang yang sama */
-    max-width: 45%;  /* Membatasi lebar maksimal */
-
-}
-
-.skill-category h3 {
-    color: var(--primary);
-    margin-bottom: 10%;
-    font-size: 24px; /* Memperbesar ukuran font */  
-    text-align: center;
-    transition: text-shadow 0.3s ease;
-}
-
-.skill-category h3:hover {
-    text-shadow: 0 0 10px var(--glow-color);
-}
-
-.skill-list {
-    list-style: none;
-}
-
-.skill-list li {
-    margin-bottom: 25px; /* Memperbesar jarak antar skill */
-    font-size: 16px; /* Memperbesar ukuran font */
-}
-
-.skill-bar {
-    width: 100%;
-    height: 12px;
-    background: rgba(0, 255, 255, 0.1);
-    border: 1px solid var(--primary);
-    margin-top: 8px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    min-width: 250px; /* Menambah minimal width */
-}
-
-.skill-bar:hover {
-    box-shadow: 0 0 15px var(--glow-color);
-}
-
-.skill-progress {
-    height: 100%;
-    background: var(--primary);
-    position: absolute;
-    left: 0;
-    top: 0;
-    transition: width 1s ease-in-out;
-    box-shadow: 0 0 10px var(--glow-color); /* Menambah glow effect */
-}
-
-/* Timeline */
-.timeline {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.timeline-item {
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid var(--primary);
-    background: rgba(0, 255, 255, 0.05);
-    transition: all 0.3s ease;
-}
-
-.timeline-item:hover {
-    box-shadow: 0 0 20px var(--glow-color);
-    transform: translateX(5px);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        position: fixed;
-        top: 80px;
-        left: 0;
-        right: 0;
-        background-color: black;
-        opacity: 90%;
-        padding: 20px;
-        flex-direction: column;
-        text-align: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .menu-btn {
-        display: block;
-    }
-
-    .hologram-container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .hero-content {
-        order: 2;
-    }
-
-    .profile-image {
-        order: 1;
-    }
-
-    .social-links {
-        justify-content: center;
-    }
-
-    .hero-content h1 {
-        font-size: 36px;
-    }
-
-    .projects-grid {
-        flex-direction: column;
-    }    
-
-    .skills-grid {
-        flex-direction: column;
-        gap: 40px;
-        padding: 20px;
-        grid-template-columns: 1fr;
-    }
-
-    .skill-category {
-        max-width: 100%;  /* Full width on mobile */
-    }
-}
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <nav>
-            <div class="logo">Mr King's Official</div>
-            <div class="nav-links">
-                <a data-section="home" class="active">Home</a>
-                <a data-section="about">About</a>
-                <a data-section="projects">Projects</a>
-                <a data-section="skills">Skills</a>
-                <a data-section="content">Content</a>
-            </div>
-            <div class="menu-btn">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
-
-        <main id="main-content">
-            <!-- Home Section -->
-            <section id="home" class="content-section active">
-                <div class="hologram-container">
-                    <div class="hero-content">
-                        <h1>Hi, I'm Mr King's Official</h1>
-                        <h2>I'M A 
-                            <span class="typewriter-text"></span>
-                        </h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit ipsa distincta repudiandae
-                            architecto et iste quisquam rerum molestiae non fraudalentur.</p>
-                        <a href="https://clubgratis.bio/" class="btn">More Here</a>
-                        <div class="social-links">
-                            <a href="https://github.com/MarinaAqua/Portofolio2/"><i class="fab fa-github"></i></a>
-                            <a href="https://www.youtube.com/@mrkingsofficial6366"><i class="fab fa-youtube"></i></a>
-                            <a href="https://t.me/club_gratis"><i class="fab fa-telegram"></i></a>
-                            <a href="https://t.me/club_gratis1"><i class="far fa-envelope"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="profile-image">
-                        <div class="profile-circle">
-                            <img src="/logo.jpg" alt="Profile">
-                        </div>
-                    </div>
-                </div>
-
-            </section>
-
-            <!-- About Section -->
-            <section id="about" class="content-section">
-                <div class="hologram-container">
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <h3>Early Years</h3>
-                            <p>Started coding at age 12, building simple games and websites.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h3>Education</h3>
-                            <p>Computer Science degree with focus on AI and Machine Learning.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h3>Present</h3>
-                            <p>Leading development teams and creating impactful solutions.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Projects Section -->
-            <section id="projects" class="content-section">
-                <div class="hologram-container">
-                    <div class="projects-grid">
-                        <div class="project-card">
-                            <h3>AI Image Generator</h3>
-                            <p>A deep learning model that generates artistic images from text descriptions.</p>
-                            <div class="tech-stack">
-                                <span>Python</span>
-                                <span>TensorFlow</span>
-                                <span>React</span>
-                            </div>
-                        </div>
-                        <div class="project-card">
-                            <h3>Smart Home System</h3>
-                            <p>IoT-based home automation system with voice control and energy monitoring.</p>
-                            <div class="tech-stack">
-                                <span>Node.js</span>
-                                <span>MongoDB</span>
-                                <span>React Native</span>
-                            </div>
-                        </div>
-                        <div class="project-card">
-                            <h3>Blockchain Wallet</h3>
-                            <p>Secure cryptocurrency wallet with multi-signature support.</p>
-                            <div class="tech-stack">
-                                <span>Solidity</span>
-                                <span>Web3.js</span>
-                                <span>Vue.js</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-            <!-- Skills Section -->
-            <section id="skills" class="content-section">
-                <div class="hologram-container">
-                    <div class="skills-grid">
-                        <div class="skill-category">
-                            <h3>Frontend</h3>
-                            <ul class="skill-list">
-                                <li>
-                                    HTML/CSS
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 95%;"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    JavaScript
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 90%;"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    React
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 85%;"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="skill-category">
-                            <h3>Backend</h3>
-                            <ul class="skill-list">
-                                <li>
-                                    Node.js
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 88%;"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    Python
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 92%;"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    Database
-                                    <div class="skill-bar">
-                                        <div class="skill-progress" style="width: 87%;"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Content Section -->
-            <section id="content" class="content-section">
-                <div class="hologram-container">
-                    <div class="content-grid">
-                        <h2>Latest Blog Posts</h2>
-                        <!-- Add your blog posts or other content here -->
-                    </div>
-                </div>
-            </section>
-        </main>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MyWebsite</title>
+    <!-- Tailwind + DaisyUI CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.24/dist/full.min.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body class="bg-base-100 text-base-content">
+    <!-- Navbar -->
+    <div class="navbar bg-base-200 px-6 fixed">
+      <div class="flex-1">
+        <a class="btn btn-ghost text-xl">MyWebsite</a>
+      </div>
+      <div class="flex-none">
+        <ul class="menu menu-horizontal px-1">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
     </div>
 
-    <script src="js/script.js"></script>
-    <script>
-              // DOM Elements
-        const menuBtn = document.querySelector('.menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        const navItems = document.querySelectorAll('.nav-links a');
-        const contentSections = document.querySelectorAll('.content-section');
+    <!-- Hero Section -->
+    <section id="hero" class="hero min-h-screen bg-base-100">
+      <div class="hero-content text-center">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-bold">Welcome to MyWebsite</h1>
+          <p class="py-6">Build beautiful websites effortlessly using Tailwind and DaisyUI.</p>
+          <a href="#features" class="btn btn-primary">Get Started</a>
+        </div>
+      </div>
+    </section>
 
-        // Toggle mobile menu
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-base-200">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-10">Features</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h3 class="card-title">Fast Development</h3>
+              <p>Rapidly build and customize your UI with Tailwind CSS utility classes.</p>
+            </div>
+          </div>
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h3 class="card-title">Beautiful UI</h3>
+              <p>DaisyUI components come styled and ready to use — just plug and play.</p>
+            </div>
+          </div>
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h3 class="card-title">Fully Responsive</h3>
+              <p>Designed with mobile-first responsiveness in mind for all devices.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.nav-links') && !e.target.closest('.menu-btn')) {
-                navLinks.classList.remove('active');
-            }
-        });
-
-        // Handle navigation
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                // Update active nav item
-                navItems.forEach(nav => nav.classList.remove('active'));
-                item.classList.add('active');
-
-                // Show corresponding section
-                const sectionId = item.getAttribute('data-section');
-                contentSections.forEach(section => {
-                    section.classList.remove('active');
-                    if (section.id === sectionId) {
-                        section.classList.add('active');
-                    }
-                });
-
-                // Close mobile menu after click
-                navLinks.classList.remove('active');
-            });
-        });
-
-
-        const texts = [
-            " DEVELOPER",
-            "YOUTUBER",
-            "DESIGNER"
-        ]
-        
-        let speed = 100;
-        
-        const textElements = document.querySelector(".typewriter-text")
-        
-        let textIndex = 0;
-        let charcterIndex = 0;
-        
-        function typeWriter() {
-            if(charcterIndex < texts[textIndex].length){
-                textElements.innerHTML += texts[textIndex].charAt(charcterIndex);
-                charcterIndex++;
-                setTimeout(typeWriter, speed); 
-            }
-            else{
-                setTimeout(eraseText, 1000)
-            }
-        }
-        
-        function eraseText() {
-            if(textElements.innerHTML.length > 0){
-                textElements.innerHTML = textElements.innerHTML.slice(0,-1)
-                setTimeout(eraseText, 50)
-            }
-            else{
-                textIndex = (textIndex + 1) % texts.length;
-                charcterIndex = 0;
-                setTimeout(typeWriter,500)
-            }
-        }
-        
-        window.onload = typeWriter;
-        
-    </script>
-</body>
-
+    <!-- Footer -->
+    <footer class="footer p-10 bg-base-300 text-base-content">
+      <aside>
+        <p>MyWebsite © 2025 - All rights reserved</p>
+      </aside>
+      <nav>
+        <h6 class="footer-title">Social</h6>
+        <div class="grid grid-flow-col gap-4">
+          <a href="#"
+            ><svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-6 h-6" viewBox="0 0 24 24">
+              <path
+                d="M24 4.5a9.9 9.9 0 0 1-2.8.8 5 5 0 0 0 2.2-2.7 9.8 9.8 0 0 1-3.1 1.2 4.9 4.9 0 0 0-8.5 4.5A13.9 13.9 0 0 1 1.6 3.2a4.9 4.9 0 0 0 1.5 6.5A4.8 4.8 0 0 1 .9 9v.1a4.9 4.9 0 0 0 3.9 4.8 5 5 0 0 1-2.2.1 4.9 4.9 0 0 0 4.6 3.4 9.8 9.8 0 0 1-6.1 2.1A10 10 0 0 1 0 20a13.9 13.9 0 0 0 7.5 2.2c9 0 13.9-7.5 13.9-14v-.6A10 10 0 0 0 24 4.5z"
+              /></svg
+          ></a>
+        </div>
+      </nav>
+    </footer>
+  </body>
 </html>
