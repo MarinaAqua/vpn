@@ -5,13 +5,13 @@ minify = true
 workers_dev = true
 
 routes = [
-  { pattern = "clubgratis.xyz", custom_domain = true },
-  { pattern = "ava.game.naver.com.clubgratis.xyz", custom_domain = true },
-  { pattern = "quiz.int.vidio.com.clubgratis.xyz", custom_domain = true },
-  { pattern = "graph.instagram.com.clubgratis.xyz", custom_domain = true },
-  { pattern = "zaintest.vuclip.com.clubgratis.xyz", custom_domain = true },
-  { pattern = "support.zoom.us.clubgratis.xyz", custom_domain = true },  
-  { pattern = "cache.netflix.com.clubgratis.xyz", custom_domain = true },
+  { pattern = "vpn.clubgratis.web.id", custom_domain = true },
+  { pattern = "ava.game.naver.com.vpn.clubgratis.web.id", custom_domain = true },
+  { pattern = "quiz.int.vidio.com.vpn.clubgratis.web.id", custom_domain = true },
+  { pattern = "graph.instagram.com.vpn.clubgratis.web.id", custom_domain = true },
+  { pattern = "zaintest.vuclip.com.vpn.clubgratis.web.id", custom_domain = true },
+  { pattern = "support.zoom.us.vpn.clubgratis.web.id", custom_domain = true },  
+  { pattern = "cache.netflix.com.vpn.clubgratis.web.id", custom_domain = true },
 ]
 
 [[kv_namespaces]]
@@ -24,12 +24,8 @@ command = "cargo install -q worker-build && worker-build --release"
 build = { command = "cargo install -q worker-build && worker-build --dev" }
 
 [vars]
-UUID = "aaaaaaa1-bbbb-4ccc-addd-eeeeeeeeeee1"
+UUID = "ccccccc1-bbbb-4aaa-addd-aaaaaaaaaaa1"
 MAIN_PAGE_URL = "https://raw.githubusercontent.com/MarinaAqua/vpn/refs/heads/master/web/index.html"
 SUBLINK_PAGE_URL = "https://raw.githubusercontent.com/MarinaAqua/vpn/refs/heads/master/web/sublink.html"
 WEBLINK_PAGE_URL = "https://raw.githubusercontent.com/MarinaAqua/vpn/refs/heads/master/web/weblink.html"
-VMESS_PAGE_URL = "https://raw.githubusercontent.com/MarinaAqua/vpn/refs/heads/master/web/vmess.html"
-VLESS_PAGE_URL = "https://raw.githubusercontent.com/MarinaAqua/vpn/refs/heads/master/web/vless.html"
-TROJAN_PAGE_URL = "https://raw.githubusercontent.com/MarinaAqua/vpn/refs/heads/master/web/trojan.html"
-SS_PAGE_URL = "https://raw.githubusercontent.com/MarinaAqua/vpn/refs/heads/master/web/ss.html"
 CONVERTER_PAGE_URL = "https://raw.githubusercontent.com/MarinaAqua/vpn/refs/heads/master/web/converter.html"
